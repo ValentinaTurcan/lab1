@@ -1,0 +1,19 @@
+# security.yaml
+security:
+    providers:
+        users_in_memory:
+            memory:
+                users:
+                    user:
+                        password: '$2y$13$od.xKnAfc5EZuhC02D.vG.Rg/xu0u7aVfCi0Me7JbsgjU2dAmOAGe' # bcrypt-hashed password
+                        roles: ['ROLE_USER']
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            lazy: true
+            provider: users_in_memory
+
+    access_control:
+        - { path: '^/create', roles: ROLE_USER }
